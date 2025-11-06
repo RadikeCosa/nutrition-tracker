@@ -24,6 +24,7 @@
   - Archivos de cobertura de código (`coverage/`, `*.lcov`, `.nyc_output/`).
   - Archivos generados por Vitest (`.vitest/`).
   - Archivos de entorno (`.env`, `.env.local`, `.env.*.local`).
+  - Carpeta `documents/` para excluirla del control de versiones.
 
 ## Comandos Ejecutados
 
@@ -43,7 +44,7 @@
 
 4. Configuración del repositorio Git:
    - Se inicializó el repositorio Git.
-   - Se actualizó el archivo `.gitignore`.
+   - Se actualizó el archivo `.gitignore` para excluir archivos innecesarios.
 
 ## Resultado Final
 
