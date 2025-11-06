@@ -173,5 +173,3 @@ Este proyecto sigue un enfoque de **desarrollo incremental** con **TDD (Test-Dri
 - **Aprendizaje continuo** - Experimentación con nuevas tecnologías
 
 ---
-
-⭐ Si este proyecto te resulta útil o interesante, ¡no olvides darle una estrella!
