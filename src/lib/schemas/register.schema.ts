@@ -20,23 +20,25 @@ export const MealTypeEnum = z.enum([
 
 export const SweetenerEnum = z.enum(["sugar", "sweetener"]);
 
-// Schema principal
-export const RegisterSchema = z.object({
-  id: z.string().uuid(),
-  userId: z.string().min(1),
-  userName: z.string().min(1),
-  food: z.string().min(1),
-  amount: z.number().positive(),
+// Schema base (sin id ni createdAt) - el que necesita el formulario
+export const RegisterInputSchema = z.object({
+  userId: z.string().min(1, "Selecciona un usuario"),
+  userName: z.string().min(1, "El nombre de usuario es requerido"),
+  food: z.string().min(1, "El alimento es requerido"),
+  amount: z.number().positive("La cantidad debe ser positiva"),
   unit: UnitEnum,
-  date: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)"),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Formato de fecha inválido"),
   time: z
     .string()
-    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Invalid time format (HH:MM)"),
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Formato de hora inválido"),
   mealType: MealTypeEnum,
   sweetener: SweetenerEnum.nullable(),
   notes: z.string().optional(),
+});
+
+// Schema completo (con id y createdAt) - el que se guarda en storage
+export const RegisterSchema = RegisterInputSchema.extend({
+  id: z.string().uuid(),
   createdAt: z
     .string()
     .regex(
@@ -45,5 +47,6 @@ export const RegisterSchema = z.object({
     ),
 });
 
-// Tipo inferido
+// Tipos inferidos
+export type RegisterInput = z.infer<typeof RegisterInputSchema>;
 export type Register = z.infer<typeof RegisterSchema>;

@@ -1,5 +1,9 @@
-import { ZodType, ZodError } from "zod";
-import { RegisterSchema, Register } from "../schemas/register.schema.js";
+import { ZodType } from "zod";
+import {
+  RegisterSchema,
+  Register,
+  RegisterInput,
+} from "../schemas/register.schema.js";
 
 const STORAGE_KEY = "nutrition-tracker-registers";
 
@@ -61,7 +65,7 @@ export function getRegistersByUserId(userId: string): Register[] {
   return getAllRegisters().filter((reg) => reg.userId === userId);
 }
 
-export type NewRegisterInput = Omit<Register, "id" | "createdAt">;
+export type NewRegisterInput = RegisterInput;
 
 export type Result<T> =
   | { success: true; data: T; message?: string }
