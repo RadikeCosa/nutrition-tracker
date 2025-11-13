@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   RegisterInputSchema,
@@ -17,7 +17,6 @@ import {
   sweetenerOptions,
 } from "../../constants/labels.js";
 
-// Helper para obtener fecha y hora actual
 const getCurrentDateTime = () => {
   const now = new Date();
   return {
@@ -46,7 +45,8 @@ const RegistrationForm: React.FC = () => {
     setValue,
     watch,
   } = useForm<RegisterInput>({
-    resolver: zodResolver(RegisterInputSchema),
+    // Cast para alinear tipos cuando hay coerce/preprocess en Zod
+    resolver: zodResolver(RegisterInputSchema) as any,
     defaultValues: {
       food: "",
       amount: 1,
@@ -72,20 +72,18 @@ const RegistrationForm: React.FC = () => {
     setValue("userName", user?.name ?? "");
   };
 
-  const onSubmit = (data: RegisterInput) => {
+  const onSubmit: SubmitHandler<RegisterInput> = async (data) => {
     setFeedback(null);
 
-    const result = saveRegister(data);
+    const result = await saveRegister(data);
 
-    if (result.success) {
+    if (result?.success) {
       setFeedback({
         type: "success",
         message: result.message || "Registro guardado correctamente",
       });
 
-      // Obtener fecha/hora actualizada para el reset
       const { date, time } = getCurrentDateTime();
-
       reset({
         food: "",
         amount: 1,
@@ -101,13 +99,13 @@ const RegistrationForm: React.FC = () => {
     } else {
       setFeedback({
         type: "error",
-        message: result.error.message,
+        message: result?.error?.message || "Error al guardar el registro",
       });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <fieldset>
         <legend>Registro de Consumo de Alimentos</legend>
 
@@ -204,17 +202,12 @@ const RegistrationForm: React.FC = () => {
           <label htmlFor="sweetener">Endulzante</label>
           <select
             id="sweetener"
-            {...register("sweetener", {
-              setValueAs: (value) => (value === "" ? null : value),
-            })}
-            defaultValue=""
+            aria-label="Endulzante"
+            {...register("sweetener")}
           >
             <option value="">Ninguno</option>
-            {sweetenerOptions.map((sweetener) => (
-              <option key={sweetener} value={sweetener}>
-                {SWEETENER_LABELS[sweetener]}
-              </option>
-            ))}
+            <option value="sugar">Azúcar</option>
+            <option value="sweetener">Edulcorante</option>
           </select>
           {errors.sweetener && (
             <span style={{ color: "red" }}>{errors.sweetener.message}</span>
