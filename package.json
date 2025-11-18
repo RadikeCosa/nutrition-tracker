@@ -6,21 +6,32 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:axe": "vitest run app/tests/accessibility",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "next": "16.0.3",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-hook-form": "^7.66.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "ts-loader": "^9.5.4",
+    "typescript": "^5",
+    "vitest": "^4.0.10"
   }
 }
