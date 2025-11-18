@@ -1,4 +1,4 @@
-import { RegisterSchema } from "../src/lib/schemas/register.schema.js";
+import { RegisterSchema } from "../lib/schemas/register.schema";
 
 import { describe, it, expect } from "vitest";
 
@@ -25,70 +25,70 @@ describe("RegisterSchema", () => {
 
   describe("Campos obligatorios", () => {
     it("falla si falta id", () => {
-      const { id, ...dataWithoutId } = validData;
+      const { id: _id, ...dataWithoutId } = validData;
       const result = RegisterSchema.safeParse(dataWithoutId);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("id");
     });
 
     it("falla si falta userId", () => {
-      const { userId, ...dataWithoutUserId } = validData;
+      const { userId: _userId, ...dataWithoutUserId } = validData;
       const result = RegisterSchema.safeParse(dataWithoutUserId);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("userId");
     });
 
     it("falla si falta userName", () => {
-      const { userName, ...dataWithoutUserName } = validData;
+      const { userName: _userName, ...dataWithoutUserName } = validData;
       const result = RegisterSchema.safeParse(dataWithoutUserName);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("userName");
     });
 
     it("falla si falta food", () => {
-      const { food, ...dataWithoutFood } = validData;
+      const { food: _food, ...dataWithoutFood } = validData;
       const result = RegisterSchema.safeParse(dataWithoutFood);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("food");
     });
 
     it("falla si falta amount", () => {
-      const { amount, ...dataWithoutAmount } = validData;
+      const { amount: _amount, ...dataWithoutAmount } = validData;
       const result = RegisterSchema.safeParse(dataWithoutAmount);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("amount");
     });
 
     it("falla si falta unit", () => {
-      const { unit, ...dataWithoutUnit } = validData;
+      const { unit: _unit, ...dataWithoutUnit } = validData;
       const result = RegisterSchema.safeParse(dataWithoutUnit);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("unit");
     });
 
     it("falla si falta date", () => {
-      const { date, ...dataWithoutDate } = validData;
+      const { date: _date, ...dataWithoutDate } = validData;
       const result = RegisterSchema.safeParse(dataWithoutDate);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("date");
     });
 
     it("falla si falta time", () => {
-      const { time, ...dataWithoutTime } = validData;
+      const { time: _time, ...dataWithoutTime } = validData;
       const result = RegisterSchema.safeParse(dataWithoutTime);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("time");
     });
 
     it("falla si falta mealType", () => {
-      const { mealType, ...dataWithoutMealType } = validData;
+      const { mealType: _mealType, ...dataWithoutMealType } = validData;
       const result = RegisterSchema.safeParse(dataWithoutMealType);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("mealType");
     });
 
     it("falla si falta createdAt", () => {
-      const { createdAt, ...dataWithoutCreatedAt } = validData;
+      const { createdAt: _createdAt, ...dataWithoutCreatedAt } = validData;
       const result = RegisterSchema.safeParse(dataWithoutCreatedAt);
       expect(result.success).toBe(false);
       expect(result.error?.issues[0]?.path).toContain("createdAt");
@@ -207,7 +207,7 @@ describe("RegisterSchema", () => {
     });
 
     it("acepta notes opcional", () => {
-      const { notes, ...dataWithoutNotes } = validData;
+      const { notes: _notes, ...dataWithoutNotes } = validData;
       const result = RegisterSchema.safeParse(dataWithoutNotes);
       expect(result.success).toBe(true);
     });
