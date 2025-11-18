@@ -36,6 +36,10 @@
     "tailwindcss": "^4",
     "ts-loader": "^9.5.4",
     "typescript": "^5",
-    "vitest": "^4.0.10"
+    "vitest": "^4.0.10",
+    "storybook": "^10.0.8",
+    "@storybook/nextjs": "^10.0.8",
+    "@storybook/addon-docs": "^10.0.8",
+    "@storybook/addon-onboarding": "^10.0.8"
   }
 }
