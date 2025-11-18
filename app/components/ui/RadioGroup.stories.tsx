@@ -95,8 +95,8 @@ export const ManyOptions: Story = {
 };
 
 // Interactive example
-const InteractiveTemplate = (args: any) => {
-  const [value, setValue] = useState(args.value || '');
+const InteractiveTemplate = (args: Story['args']) => {
+  const [value, setValue] = useState(args?.value || '');
   
   return (
     <div>
@@ -105,7 +105,7 @@ const InteractiveTemplate = (args: any) => {
         value={value}
         onChange={(newValue) => {
           setValue(newValue);
-          args.onChange?.(newValue);
+          args?.onChange?.(newValue);
         }}
       />
       <p className="mt-4 text-sm text-gray-600">Selected value: {value || 'None'}</p>
