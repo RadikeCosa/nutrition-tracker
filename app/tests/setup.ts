@@ -1,5 +1,5 @@
 import { cleanup } from "@testing-library/react";
-import { afterEach, beforeEach, expect } from "vitest";
+import { afterEach, beforeEach } from "vitest";
 import "@testing-library/jest-dom";
 
 // Los matchers se extienden automáticamente al importar @testing-library/jest-dom

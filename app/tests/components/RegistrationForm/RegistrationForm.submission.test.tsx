@@ -1,6 +1,12 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import RegistrationForm from "../../../components/RegistrationForm/RegistrationForm";
+
+// Mock del helper de storage
+vi.mock("../../../lib/storage/localStorage", () => ({
+  saveRegister: vi.fn(),
+}));
+
 import { saveRegister } from "../../../lib/storage/localStorage";
 
 function selectFirstUser() {
