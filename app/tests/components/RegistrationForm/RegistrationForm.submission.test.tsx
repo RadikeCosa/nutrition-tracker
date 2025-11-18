@@ -1,6 +1,13 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import RegistrationForm from "../../../components/RegistrationForm/RegistrationForm";
+
+// Mock del helper de storage
+vi.mock("../../../lib/storage/localStorage", () => ({
+  saveRegister: vi.fn(),
+}));
+
+// Importar después del mock para obtener la función mockeada
 import { saveRegister } from "../../../lib/storage/localStorage";
 
 function selectFirstUser() {
@@ -31,7 +38,7 @@ describe("RegistrationForm - Submission & Persistencia", () => {
   });
 
   it("llama a saveRegister con los datos correctos", async () => {
-    vi.mocked(saveRegister).mockReturnValue({
+    vi.mocked(saveRegister).mockImplementation(() => ({
       success: true,
       data: {
         userId: "mock-user",
@@ -48,7 +55,7 @@ describe("RegistrationForm - Submission & Persistencia", () => {
         notes: "",
       },
       message: "OK",
-    });
+    }));
 
     render(<RegistrationForm />);
     const selectedUserId = await fillValidForm();
@@ -72,7 +79,7 @@ describe("RegistrationForm - Submission & Persistencia", () => {
 
   it("deshabilita el botón durante el submit y vuelve a habilitarlo", async () => {
     // Mock with synchronous return
-    vi.mocked(saveRegister).mockReturnValue({
+    vi.mocked(saveRegister).mockImplementation(() => ({
       success: true,
       data: {
         userId: "mock-user",
@@ -89,7 +96,7 @@ describe("RegistrationForm - Submission & Persistencia", () => {
         notes: "",
       },
       message: "OK",
-    });
+    }));
 
     render(<RegistrationForm />);
     await fillValidForm();
@@ -109,7 +116,7 @@ describe("RegistrationForm - Submission & Persistencia", () => {
   });
 
   it("resetea campos tras submit exitoso pero mantiene el usuario seleccionado", async () => {
-    vi.mocked(saveRegister).mockReturnValue({
+    vi.mocked(saveRegister).mockImplementation(() => ({
       success: true,
       data: {
         userId: "mock-user",
@@ -126,7 +133,7 @@ describe("RegistrationForm - Submission & Persistencia", () => {
         notes: "",
       },
       message: "OK",
-    });
+    }));
 
     render(<RegistrationForm />);
     const selectedUserId = await fillValidForm();

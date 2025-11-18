@@ -1,4 +1,4 @@
-import { RegisterSchema } from "../src/lib/schemas/register.schema.js";
+import { RegisterSchema } from "@/app/lib/schemas/register.schema";
 
 import { describe, it, expect } from "vitest";
 

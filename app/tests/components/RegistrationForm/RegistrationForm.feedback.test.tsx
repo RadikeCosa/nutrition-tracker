@@ -31,7 +31,7 @@ describe("RegistrationForm - Feedback", () => {
   });
 
   it("muestra mensaje de éxito al guardar correctamente", async () => {
-    vi.mocked(saveRegister).mockReturnValue({
+    vi.mocked(saveRegister).mockImplementation(() => ({
       success: true,
       data: {
         userId: "mock",
@@ -48,7 +48,7 @@ describe("RegistrationForm - Feedback", () => {
         notes: "",
       },
       message: "Registro guardado correctamente",
-    });
+    }));
 
     render(<RegistrationForm />);
     await fillMinimalValidForm();
@@ -63,10 +63,10 @@ describe("RegistrationForm - Feedback", () => {
   });
 
   it("muestra mensaje de error si saveRegister falla", async () => {
-    vi.mocked(saveRegister).mockReturnValue({
+    vi.mocked(saveRegister).mockImplementation(() => ({
       success: false,
       error: { code: "STORAGE_ERROR", message: "Error al guardar el registro" },
-    });
+    }));
 
     render(<RegistrationForm />);
     await fillMinimalValidForm();
@@ -82,7 +82,7 @@ describe("RegistrationForm - Feedback", () => {
 
   it("oculta el feedback anterior al volver a enviar", async () => {
     vi.mocked(saveRegister)
-      .mockReturnValueOnce({
+      .mockImplementationOnce(() => ({
         success: true,
         data: {
           userId: "mock",
@@ -99,11 +99,11 @@ describe("RegistrationForm - Feedback", () => {
           notes: "",
         },
         message: "Registro guardado",
-      })
-      .mockReturnValueOnce({
+      }))
+      .mockImplementationOnce(() => ({
         success: false,
         error: { code: "STORAGE_ERROR", message: "Error de almacenamiento" },
-      });
+      }));
 
     render(<RegistrationForm />);
     await fillMinimalValidForm();

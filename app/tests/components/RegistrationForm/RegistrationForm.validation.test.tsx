@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import RegistrationForm from "@/app/components/RegistrationForm/RegistrationForm.js";
-import { USERS } from "@/app/constants/users.js";
+import RegistrationForm from "@/app/components/RegistrationForm/RegistrationForm";
+import { USERS } from "@/app/constants/users";
 
 describe("RegistrationForm - Validation", () => {
   beforeEach(() => {
