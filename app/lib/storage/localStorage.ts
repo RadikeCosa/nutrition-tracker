@@ -4,6 +4,7 @@ import {
   Register,
   RegisterInput,
 } from "../schemas/register.schema";
+import { v4 as uuidv4 } from "uuid";
 
 const STORAGE_KEY = "nutrition-tracker-registers";
 
@@ -78,8 +79,8 @@ function generateId(): string {
   if (typeof crypto !== "undefined" && crypto.randomUUID) {
     return crypto.randomUUID();
   }
-  // Fallback simple
-  return Math.random().toString(36).slice(2) + Date.now().toString(36);
+  // Fallback usando uuidv4
+  return uuidv4();
 }
 
 /**
