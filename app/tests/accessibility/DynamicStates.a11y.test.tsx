@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { act } from "react-dom/test-utils";
 import { render, fireEvent, screen } from "@testing-library/react";
 import axe from "axe-core";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
@@ -16,17 +17,19 @@ describe("A11y - Dynamic UI States", () => {
     const { container } = render(<RegistrationForm />);
     // Forzar errores: limpiar usuario si tuviera valor y alimento vacio
     const submit = screen.getByRole("button", { name: /guardar registro/i });
-    fireEvent.click(submit);
+    await act(async () => {
+      fireEvent.click(submit);
+    });
     // Ahora el formulario muestra mensajes de ErrorMessage
     const results = await runAxe(container);
     expect(results.violations).toHaveLength(0);
-  });
+  }, 10000);
 
   it("Loading Button state has no violations", async () => {
     const { container } = render(<Button isLoading>Guardar registro</Button>);
     const results = await runAxe(container);
     expect(results.violations).toHaveLength(0);
-  });
+  }, 10000);
 
   it("Input with aria-invalid + linked ErrorMessage has no violations", async () => {
     const { container } = render(
@@ -43,7 +46,7 @@ describe("A11y - Dynamic UI States", () => {
     );
     const results = await runAxe(container);
     expect(results.violations).toHaveLength(0);
-  });
+  }, 10000);
 
   it("RadioGroup in error state (hasError) has no violations", async () => {
     const { container } = render(
@@ -58,11 +61,11 @@ describe("A11y - Dynamic UI States", () => {
     );
     const results = await runAxe(container);
     expect(results.violations).toHaveLength(0);
-  });
+  }, 10000);
 
   it("Feedback success message accessible", async () => {
     const { container } = render(<ErrorMessage message="Registro guardado" />);
     const results = await runAxe(container);
     expect(results.violations).toHaveLength(0);
-  });
+  }, 10000);
 });

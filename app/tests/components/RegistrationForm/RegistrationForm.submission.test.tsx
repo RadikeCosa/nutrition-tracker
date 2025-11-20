@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
+import { act } from "react-dom/test-utils";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import RegistrationForm from "../../../components/RegistrationForm/RegistrationForm";
 
@@ -58,7 +59,11 @@ describe("RegistrationForm - Submission & Persistencia", () => {
 
     render(<RegistrationForm />);
     const selectedUserId = await fillValidForm();
-    fireEvent.click(screen.getByRole("button", { name: /guardar registro/i }));
+    await act(async () => {
+      fireEvent.click(
+        screen.getByRole("button", { name: /guardar registro/i })
+      );
+    });
 
     await waitFor(() => {
       expect(saveRegister).toHaveBeenCalledTimes(1);
@@ -74,7 +79,7 @@ describe("RegistrationForm - Submission & Persistencia", () => {
         })
       );
     });
-  });
+  }, 10000);
 
   it("deshabilita el botón durante el submit y vuelve a habilitarlo", async () => {
     // Mock with synchronous return

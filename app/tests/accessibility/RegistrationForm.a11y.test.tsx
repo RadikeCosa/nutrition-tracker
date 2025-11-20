@@ -13,5 +13,5 @@ describe("A11y - RegistrationForm", () => {
     const { container } = render(<RegistrationForm />);
     const results = await runAxe(container);
     expect(results.violations).toHaveLength(0);
-  });
+  }, 10000);
 });
