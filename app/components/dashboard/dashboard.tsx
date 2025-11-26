@@ -4,10 +4,14 @@ import { getAllRegisters } from "@/app/lib/storage/localStorage";
 import React, { useMemo } from "react";
 
 const Dashboard: React.FC = () => {
-  // ✅ No necesitás useState + useEffect para datos síncronos
-  const registros = getAllRegisters();
+  // Usar useState y useEffect para evitar SSR issues
+  const [registros, setRegistros] = React.useState<Register[]>([]);
 
-  // ✅ Cálculos memoizados (solo recalcula si registros cambia)
+  React.useEffect(() => {
+    setRegistros(getAllRegisters());
+  }, []);
+
+  // Cálculos memoizados (solo recalcula si registros cambia)
   const stats = useMemo(() => {
     if (registros.length === 0) {
       return {
