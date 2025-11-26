@@ -1,15 +1,15 @@
 "use client";
-import React from "react";
 import { Register } from "@/app/lib/schemas/register.schema";
+import { getAllRegisters } from "@/app/lib/storage/localStorage";
 
-const getRegistros = (): Register[] => {
-  if (typeof window === "undefined") return [];
-  const data = localStorage.getItem("nutrition-tracker-registers");
-  return data ? (JSON.parse(data) as Register[]) : [];
-};
+import React, { useEffect, useState } from "react";
 
 const Dashboard: React.FC = () => {
-  const registros = getRegistros();
+  const [registros, setRegistros] = useState<Register[]>([]);
+
+  useEffect(() => {
+    setRegistros(getAllRegisters());
+  }, []);
 
   return (
     <div>
@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
         {registros.length === 0 ? (
           <li>No hay registros guardados.</li>
         ) : (
-          registros.map((registro) => (
+          registros.map((registro: Register) => (
             <li key={registro.id}>
               {registro.date} {registro.time} - {registro.food} (
               {registro.amount} {registro.unit})
