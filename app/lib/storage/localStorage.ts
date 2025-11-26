@@ -1,3 +1,4 @@
+"use client";
 import { ZodType } from "zod";
 import {
   RegisterSchema,
