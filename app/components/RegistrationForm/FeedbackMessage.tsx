@@ -9,19 +9,22 @@ export const FeedbackMessage: React.FC<FeedbackMessageProps> = ({
   type,
   message,
 }) => {
-  const base = "w-full rounded-md p-3 text-sm flex items-start gap-2";
+  const baseClasses =
+    "w-full rounded-md p-3 text-sm flex items-start gap-2 border";
 
-  const successStyles = "bg-green-100 border border-green-200 text-green-800";
-  const errorStyles = "bg-red-100 border border-red-200 text-red-800";
+  const typeClasses = {
+    success: "bg-mint/20 border-mint text-gray-800",
+    error: "bg-coral/20 border-coral text-gray-800",
+  };
 
   const icon =
     type === "success" ? (
       <svg
-        className="h-5 w-5 shrink-0"
+        className="h-5 w-5 shrink-0 text-mint"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
-        aria-hidden
+        aria-hidden="true"
       >
         <path
           fillRule="evenodd"
@@ -31,26 +34,24 @@ export const FeedbackMessage: React.FC<FeedbackMessageProps> = ({
       </svg>
     ) : (
       <svg
-        className="h-5 w-5 shrink-0"
+        className="h-5 w-5 shrink-0 text-coral"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
-        aria-hidden
+        aria-hidden="true"
       >
         <path
           fillRule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-4h2v2H9v-2zm0-8h2v6H9V6z"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
           clipRule="evenodd"
         />
       </svg>
     );
 
-  const className = `${base} ${
-    type === "success" ? successStyles : errorStyles
-  }`;
+  const classes = [baseClasses, typeClasses[type]].join(" ");
 
   return (
-    <div role="alert" aria-live="polite" className={className}>
+    <div role="alert" aria-live="polite" className={classes}>
       {icon}
       <p className="leading-tight">{message}</p>
     </div>

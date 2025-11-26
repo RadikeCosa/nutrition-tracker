@@ -22,7 +22,7 @@ export const Label: React.FC<LabelProps> = ({
       {required && (
         <>
           {" "}
-          <span aria-hidden="true" className="text-red-600">
+          <span aria-hidden="true" className="text-melon">
             *
           </span>
           <span className="sr-only"> requerido</span>

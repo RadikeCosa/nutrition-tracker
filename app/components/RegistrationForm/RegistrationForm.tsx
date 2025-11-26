@@ -309,7 +309,7 @@ const RegistrationForm: React.FC = () => {
             isLoading={isSubmitting}
             disabled={isSubmitting}
             variant="primary"
-            className="w-full"
+            className="w-full shadow-lg border-2 border-melon bg-melon"
           >
             {isSubmitting ? "Guardando..." : "Guardar Registro"}
           </Button>

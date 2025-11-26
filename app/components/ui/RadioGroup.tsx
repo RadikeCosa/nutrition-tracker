@@ -37,33 +37,35 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     }
   };
 
+  const getLabelClasses = (optionValue: string) => {
+    const baseClasses =
+      "flex items-center gap-2 px-4 py-3 border rounded-md cursor-pointer transition-colors";
+
+    const stateClasses =
+      value === optionValue
+        ? "border-melon bg-melon/10"
+        : "border-peach bg-white hover:border-peach/60";
+
+    const errorClasses = hasError && !value ? "border-coral" : "";
+
+    return [baseClasses, stateClasses, errorClasses].filter(Boolean).join(" ");
+  };
+
   return (
     <div
-      className={`mt-1 ${containerClass} ${className}`.trim()}
+      className={[containerClass, "mt-1", className].filter(Boolean).join(" ")}
       role="radiogroup"
       aria-labelledby={ariaLabelledBy}
     >
       {options.map((option) => (
-        <label
-          key={option.value}
-          className={`
-            flex items-center gap-2 px-4 py-3 border rounded-md cursor-pointer
-            transition-colors
-            ${
-              value === option.value
-                ? "border-blue-600 bg-blue-50"
-                : "border-gray-300 bg-white hover:border-gray-400"
-            }
-            ${hasError && !value ? "border-red-600" : ""}
-          `.trim()}
-        >
+        <label key={option.value} className={getLabelClasses(option.value)}>
           <input
             type="radio"
             name={name}
             value={option.value}
             checked={value === option.value}
             onChange={handleChange}
-            className="w-4 h-4 text-blue-600 focus:ring-2 focus:ring-blue-500"
+            className="w-4 h-4 text-melon focus:ring-2 focus:ring-melon accent-melon"
           />
           <span className="text-sm font-medium text-gray-700">
             {option.label}

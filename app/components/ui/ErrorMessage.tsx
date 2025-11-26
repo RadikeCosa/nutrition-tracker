@@ -35,7 +35,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
   return (
     <span
       id={id}
-      className={`text-sm text-red-600 mt-1 block ${className}`.trim()}
+      className={`text-sm text-coral mt-1 block ${className}`.trim()}
       role="alert"
       aria-live="polite"
     >
