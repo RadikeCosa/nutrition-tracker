@@ -1,6 +1,10 @@
 "use client";
 import { Register } from "@/app/lib/schemas/register.schema";
-import { getAllRegisters } from "@/app/lib/storage/localStorage";
+import {
+  getAllRegisters,
+  clearAllRegisters,
+  deleteRegister,
+} from "@/app/lib/storage/localStorage";
 import React, { useMemo } from "react";
 
 const Dashboard: React.FC = () => {
@@ -62,6 +66,23 @@ const Dashboard: React.FC = () => {
     return `Hace ${dias} días`;
   };
 
+  // Handler para eliminar todos los registros
+  const handleClearAll = () => {
+    const confirmClear = window.confirm(
+      "¿Seguro que quieres eliminar todos los registros?"
+    );
+    if (confirmClear) {
+      clearAllRegisters();
+      setRegistros([]);
+    }
+  };
+
+  // Handler para eliminar registro individual
+  const handleDeleteRegister = (id: string) => {
+    deleteRegister(id);
+    setRegistros((prev) => prev.filter((r) => r.id !== id));
+  };
+
   return (
     <div
       style={{
@@ -80,6 +101,8 @@ const Dashboard: React.FC = () => {
       >
         Dashboard Nutricional
       </h1>
+
+      {/* ...existing code... */}
 
       {/* Grid de estadísticas */}
       {registros.length === 0 ? (
@@ -234,13 +257,72 @@ const Dashboard: React.FC = () => {
                     padding: "1rem",
                     marginBottom: "0.5rem",
                     borderRadius: "4px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                   }}
                 >
-                  {registro.date} {registro.time} - {registro.food} (
-                  {registro.amount} {registro.unit})
+                  <span>
+                    {registro.date} {registro.time} - {registro.food} (
+                    {registro.amount} {registro.unit})
+                  </span>
+                  <button
+                    onClick={() => handleDeleteRegister(registro.id)}
+                    title="Eliminar registro"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "var(--color-error)",
+                      fontWeight: "bold",
+                      fontSize: "1.2rem",
+                      cursor: "pointer",
+                      marginLeft: "1rem",
+                      borderRadius: "50%",
+                      width: "2rem",
+                      height: "2rem",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "background 0.2s",
+                    }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.background =
+                        "var(--color-error)/10")
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.background = "transparent")
+                    }
+                  >
+                    ×
+                  </button>
                 </li>
               ))}
             </ul>
+            {/* Botón discreto para eliminar todos los registros, abajo */}
+            {registros.length > 0 && (
+              <div style={{ textAlign: "right", marginTop: "2.5rem" }}>
+                <button
+                  onClick={handleClearAll}
+                  style={{
+                    background: "var(--color-surface)",
+                    color: "var(--color-error)",
+                    border: "1px solid var(--color-error)",
+                    borderRadius: "4px",
+                    padding: "0.5rem 1.2rem",
+                    fontWeight: "normal",
+                    fontSize: "0.95rem",
+                    cursor: "pointer",
+                    boxShadow: "none",
+                    opacity: 0.7,
+                    transition: "opacity 0.2s, background 0.2s",
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.opacity = "1")}
+                  onMouseOut={(e) => (e.currentTarget.style.opacity = "0.7")}
+                >
+                  Eliminar todos los registros
+                </button>
+              </div>
+            )}
           </details>
         </>
       )}
