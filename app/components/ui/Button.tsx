@@ -23,9 +23,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantClasses = {
       primary:
-        "bg-melon text-white hover:bg-melon/80 focus:ring-melon border-2 border-melon",
+        "bg-[var(--color-accent)] text-[var(--color-background)] hover:bg-[var(--color-accent)]/80 focus:ring-[var(--color-accent)] border-2 border-[var(--color-accent)]",
       secondary:
-        "bg-peach text-gray-800 hover:bg-peach/80 focus:ring-peach border-2 border-peach",
+        "bg-[var(--color-surface)] text-[var(--color-primary)] hover:bg-[var(--color-surface)]/80 focus:ring-[var(--color-surface)] border-2 border-[var(--color-accent)]",
     };
 
     const loadingClasses = isLoading ? "cursor-wait" : "";

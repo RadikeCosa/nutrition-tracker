@@ -1,15 +1,42 @@
 @import "tailwindcss";
 
-@theme {
-  /* Paleta de colores personalizada */
-  --color-melon: #ff9aa2;
-  --color-peach: #ffb7b2;
-  --color-mint: #b5ead7;
-  --color-lemon: #ffffb3;
-  --color-lavender: #e0bbe4;
-  --color-sky: #c7ceea;
-  --color-vanilla: #fff1e6;
-  --color-coral: #ff6f91;
+/* Variables CSS para temas centralizados */
+
+:root[data-theme="light"] {
+  --color-primary: #222222;
+  --color-background: #fff;
+  --color-surface: #f3f3f3;
+  --color-error: #b91c1c;
+  --color-accent: #111; /* Negro para acento */
+  /* Legacy (mantener por compatibilidad, pero no usar) */
+  --color-melon: #e5e7eb;
+  --color-peach: #f3f3f3;
+  --color-mint: #f9f9f9;
+  --color-lemon: #ededed;
+  --color-lavender: #bbb;
+  --color-sky: #e5e5e5;
+  --color-vanilla: #f3f3f3;
+  --color-coral: #111;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #fff;
+  --color-background: #111;
+  --color-surface: #181818;
+  --color-surface-light: #232323;
+  --color-secondary: #bbb;
+  --color-muted: #bbb;
+  --color-error: #f87171;
+  --color-accent: #fff; /* Blanco para acento */
+  /* Legacy (mantener por compatibilidad, pero no usar) */
+  --color-melon: #181818;
+  --color-peach: #111;
+  --color-mint: #232323;
+  --color-lemon: #222;
+  --color-lavender: #bbb;
+  --color-sky: #111;
+  --color-vanilla: #181818;
+  --color-coral: #fff;
 }
 
 /* Estilos base */

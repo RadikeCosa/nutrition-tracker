@@ -43,10 +43,11 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
 
     const stateClasses =
       value === optionValue
-        ? "border-melon bg-melon/10"
-        : "border-peach bg-white hover:border-peach/60";
+        ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10"
+        : "border-[var(--color-surface)] bg-[var(--color-surface-light)] hover:border-[var(--color-accent)]/60";
 
-    const errorClasses = hasError && !value ? "border-coral" : "";
+    const errorClasses =
+      hasError && !value ? "border-[var(--color-error)]" : "";
 
     return [baseClasses, stateClasses, errorClasses].filter(Boolean).join(" ");
   };
@@ -65,9 +66,9 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
             value={option.value}
             checked={value === option.value}
             onChange={handleChange}
-            className="w-4 h-4 text-melon focus:ring-2 focus:ring-melon accent-melon"
+            className="w-4 h-4 text-(--color-accent) focus:ring-2 focus:ring-(--color-accent) accent-(--color-accent)"
           />
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-sm font-medium text-[var(--color-secondary)]">
             {option.label}
           </span>
         </label>

@@ -13,7 +13,7 @@ export const Label: React.FC<LabelProps> = ({
   required = false,
   ...rest
 }) => {
-  const base = "block text-sm font-medium text-gray-700";
+  const base = "block text-sm font-medium text-[var(--color-primary)]";
   const classes = `${base} ${className}`.trim();
 
   return (
@@ -22,7 +22,7 @@ export const Label: React.FC<LabelProps> = ({
       {required && (
         <>
           {" "}
-          <span aria-hidden="true" className="text-melon">
+          <span aria-hidden="true" className="text-(--color-accent)">
             *
           </span>
           <span className="sr-only"> requerido</span>

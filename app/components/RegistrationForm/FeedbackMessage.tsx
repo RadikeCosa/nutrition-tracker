@@ -13,14 +13,16 @@ export const FeedbackMessage: React.FC<FeedbackMessageProps> = ({
     "w-full rounded-md p-3 text-sm flex items-start gap-2 border";
 
   const typeClasses = {
-    success: "bg-mint/20 border-mint text-gray-800",
-    error: "bg-coral/20 border-coral text-gray-800",
+    success:
+      "bg-[var(--color-accent)]/10 border-[var(--color-accent)] text-[var(--color-primary)]",
+    error:
+      "bg-[var(--color-error)]/10 border-[var(--color-error)] text-[var(--color-primary)]",
   };
 
   const icon =
     type === "success" ? (
       <svg
-        className="h-5 w-5 shrink-0 text-mint"
+        className="h-5 w-5 shrink-0 text-(--color-accent)"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
@@ -34,7 +36,7 @@ export const FeedbackMessage: React.FC<FeedbackMessageProps> = ({
       </svg>
     ) : (
       <svg
-        className="h-5 w-5 shrink-0 text-coral"
+        className="h-5 w-5 shrink-0 text-(--color-error)"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"

@@ -14,8 +14,10 @@ export interface SelectProps
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ className = "", hasError = false, options, children, ...rest }, ref) => {
     const base =
-      "mt-1 w-full px-4 py-2 border border-peach rounded-md bg-white text-base focus:outline-none focus:ring-2 focus:ring-melon";
-    const error = hasError ? " border-coral focus:ring-coral" : "";
+      "mt-1 w-full px-4 py-2 border rounded-md bg-[var(--color-surface-light)] text-base text-[var(--color-secondary)] focus:outline-none focus:ring-2 focus:ring-(--color-accent) border-[var(--color-surface)] shadow-sm";
+    const error = hasError
+      ? " border-(--color-error) focus:ring-(--color-error)"
+      : "";
     const classes = `${base}${error} ${className}`.trim();
 
     return (

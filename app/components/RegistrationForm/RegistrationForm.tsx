@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useMemo, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   useForm,
   useWatch,
@@ -42,6 +43,7 @@ const RegistrationForm: React.FC = () => {
     type: "success" | "error";
     message: string;
   } | null>(null);
+  const router = useRouter();
 
   const users = getAllUsers();
   const { date: currentDate, time: currentTime } = useMemo(
@@ -121,6 +123,9 @@ const RegistrationForm: React.FC = () => {
         userId: selectedUserId,
         userName: data.userName,
       });
+
+      // Redirigir a dashboard después de registro exitoso
+      router.push("/dashboard");
     } else {
       setFeedback({
         type: "error",
@@ -133,10 +138,20 @@ const RegistrationForm: React.FC = () => {
     <form
       noValidate
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full max-w-2xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow"
+      className="w-full max-w-2xl mx-auto p-4 sm:p-6 rounded-lg shadow-lg"
+      style={{ background: "var(--color-background)" }}
     >
-      <fieldset className="space-y-6 border border-gray-100 rounded-md p-4 sm:p-6">
-        <legend className="text-lg font-semibold">
+      <fieldset
+        className="space-y-6 border-2 border-(--color-accent)/30 rounded-xl p-6 bg-(--color-surface-light) shadow-md"
+        style={{
+          boxShadow: "0 4px 24px rgba(0,0,0,0.10)",
+          background: "var(--color-surface-light)",
+        }}
+      >
+        <legend
+          className="text-xl font-extrabold text-(--color-accent) mb-4 tracking-tight"
+          style={{ letterSpacing: "-1px" }}
+        >
           Registro de Consumo de Alimentos
         </legend>
 
@@ -309,7 +324,7 @@ const RegistrationForm: React.FC = () => {
             isLoading={isSubmitting}
             disabled={isSubmitting}
             variant="primary"
-            className="w-full shadow-lg border-2 border-melon bg-melon"
+            className="w-full shadow-xl border-2 border-(--color-accent) bg-(--color-accent) text-lg font-bold py-3"
           >
             {isSubmitting ? "Guardando..." : "Guardar Registro"}
           </Button>
